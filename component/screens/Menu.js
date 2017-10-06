@@ -5,6 +5,8 @@ export default class Menu extends React.Component{
 
     render() {
        return (
+   
+          
           <View style={{flex:1,backgroundColor:'#FFCC59',alignItems:'center'}}>
             <Image  source={require('../../assets/images/logo_text.png')}
                   style={{width:140, height:140, marginTop: 30, resizeMode:Image.resizeMode.contain }}/>
@@ -18,7 +20,7 @@ export default class Menu extends React.Component{
                       <Text style={styles.button}>Đăng thoát</Text>
             </TouchableOpacity>
             </View>
-
+       
        );
     }
 }
@@ -32,4 +34,5 @@ const styles = StyleSheet.create({
     fontSize:25,
     color:'white'
   },
+
 });

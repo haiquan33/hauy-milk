@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 
 
 import ItemList from './tab_ItemList.js';
+import PromoList from './tab_promoList.js';
 import MenuButton from '../menu_button.js';
 
 
@@ -19,7 +20,7 @@ const TabBar=TabNavigator({
       label:'List'
   },
   Tab2:{
-      screen: ItemList
+      screen: PromoList
   }
 },
 {

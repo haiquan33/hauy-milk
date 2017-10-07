@@ -18,7 +18,7 @@ class ItemList extends React.Component {
       <View style={styles.container}>
         <FlatList
           data={this.props.ItemList}
-          renderItem={({ item }) => <ItemList_Adapter myItem={item} />}
+          renderItem={({ item }) => <ItemList_Adapter myItem={item} navigation={this.props.navigation} />}
           keyExtractor={item => item.id}
           
         />

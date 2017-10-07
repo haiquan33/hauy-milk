@@ -34,18 +34,24 @@ class ItemList_Adapter extends React.Component {
             id: this.props.myItem.id
         })
     }
+    add_to_cart(){
+         this.props.dispatch({
+                type:'ADD_TO_CART',
+                id:this.props.myItem.id
+         })
+    }
     goto_detail_page() {
         console.log("CLICKED");
+        this.props.navigation.navigate('Item_detail_page',{myItem:this.props.myItem});
     }
     render() {
-        const { name, price, des, is_none_sugar_choiced, none_sugar_quantity, have_sugar_quantity } = this.props.myItem;
+        const { name, price, des, is_none_sugar_choiced, current_quantity } = this.props.myItem;
 
         //set button style for "Khong duong" and "co duong" button
         const none_sugar_button_style = is_none_sugar_choiced ? styles.button_selected : styles.button_none_selected;
         const have_sugar_button_style = is_none_sugar_choiced ? styles.button_none_selected : styles.button_selected;
 
-        //set quantity number
-        const quantity = is_none_sugar_choiced ? none_sugar_quantity : have_sugar_quantity;
+    
         return (
 
 
@@ -54,11 +60,19 @@ class ItemList_Adapter extends React.Component {
 
             >
                 <View style={styles.overlay} />
-                <TouchableOpacity
-                    onPress={this.goto_detail_page.bind(this)}>
-                    <Text style={styles.item_name}
-                    >{name}</Text>
+                <TouchableOpacity onPress={this.goto_detail_page.bind(this)}>
+                        <Text style={styles.item_name}>{name}</Text>
                 </TouchableOpacity>
+
+                <View style={{flexDirection:'row',position:'absolute',right:0}}>
+                 
+                   
+                    <TouchableOpacity onPress={this.add_to_cart.bind(this)}>
+                        <Image source={require('../../assets/images/add_to_cart.png')}
+                        style={{width:25,height:25,marginRight:0}}
+                        />
+                    </TouchableOpacity>
+                </View>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                     <TouchableOpacity style={none_sugar_button_style}
                         onPress={this.set_to_none_sugar.bind(this)}
@@ -79,7 +93,7 @@ class ItemList_Adapter extends React.Component {
                             style={{ width: 25, height: 25, resizeMode: 'cover', opacity: 0.8 }} />
                     </TouchableOpacity>
                     <View style={{ height: 25, width: 25, backgroundColor: 'white', borderRadius: 30 / 2, alignItems: 'center', marginHorizontal: 10 }}>
-                        <Text style={{ fontFamily: 'iCielNovecentosans-Medium', fontSize: 18, textAlign: 'center' }}>{quantity}</Text>
+                        <Text style={{ fontFamily: 'iCielNovecentosans-Medium', fontSize: 18, textAlign: 'center' }}>{current_quantity}</Text>
                     </View>
                     <TouchableOpacity style={styles.button_arrow}
                         onPress={this.add_quantity.bind(this)}>
@@ -100,7 +114,7 @@ export default connect()(ItemList_Adapter);
 const styles = StyleSheet.create({
     backgroundImage: {
 
-        height: 100,
+        height: 110,
         flex: 1,
         margin: 5,
         resizeMode: 'cover',
@@ -111,7 +125,7 @@ const styles = StyleSheet.create({
         fontFamily: 'iciel-altus',
         fontSize: 25,
         color: 'white',
-        marginTop: 5
+        marginTop: 10
 
     },
     item_price: {
@@ -125,7 +139,7 @@ const styles = StyleSheet.create({
     },
     button_selected: {
         borderRadius: 40,
-        backgroundColor: '#CCFF66',
+        backgroundColor: '#FFCC59',
         height: 20,
         alignItems: 'center',
         justifyContent: 'center',

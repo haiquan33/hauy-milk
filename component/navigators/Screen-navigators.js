@@ -7,8 +7,11 @@ import Login from '../screens/login.js';
 
 import Menu from '../screens/Menu.js';
 
+
 import TabBar from '../screens/tab_page.js';
 import MenuButton from '../menu_button.js';
+import Item_detail_page from '../screens/Item_detail_page.js'
+
 ScreenStack = StackNavigator(
   {
 
@@ -18,7 +21,10 @@ ScreenStack = StackNavigator(
     Home: {
             screen: TabBar
 
-          }
+          },
+    Item_detail_page:{
+        screen: Item_detail_page
+    }
   },
 
 

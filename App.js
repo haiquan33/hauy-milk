@@ -28,7 +28,8 @@ export default class App extends React.Component {
        await Expo.Font.loadAsync({
         'iciel-altus': require('./assets/fonts/iCiel-Altus.otf'),
         'iCielNovecentosans-Light': require('./assets/fonts/iCielNovecentosans-Light.otf'),
-        'iCielNovecentosans-Medium':require('./assets/fonts/iCielNovecentosans-Medium.otf')
+        'iCielNovecentosans-Medium':require('./assets/fonts/iCielNovecentosans-Medium.otf'),
+        'UTM-Aptima':require('./assets/fonts/UTM-Aptima.ttf')
        });;
 
        this.setState({ fontLoaded: true });

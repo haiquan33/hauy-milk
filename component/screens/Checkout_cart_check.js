@@ -16,7 +16,7 @@ class Checkout_cart_check extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { totalPrice: 0, can_go_next_page: 'none' };
+    this.state = { totalPrice: 0, can_go_next_page: 'none',bill_items:'null' };
 
   }
   get_bill_items() {
@@ -56,15 +56,21 @@ class Checkout_cart_check extends React.Component {
    
     return BillList;
   }
-
+  set_bill_list() {
+    this.props.dispatch({
+        type: 'SET_BILL_LIST',
+        BillList: this.state.bill_items,
+        totalPrice:this.state.totalPrice
+    })
+  }
   render() {
-    var bill_items = this.get_bill_items();
+    this.state.bill_items = this.get_bill_items();
 
     return (
       <View style={styles.container}>
 
         <FlatList style={{ flex: 1, width: '100%' }}
-          data={bill_items}
+          data={this.state.bill_items}
           renderItem={({ item }) => <Bill_Item_Adapter myItem={item} />}
 
 
@@ -87,6 +93,7 @@ class Checkout_cart_check extends React.Component {
             right: 10,
             display: this.state.can_go_next_page,
           }} onPress={() => {
+            this.set_bill_list();
             this.props.navigation.navigate('Checkout_cart_info');
           }}>
             <Text style={{ margin: 10, marginRight: 0, fontFamily: 'iCielNovecentosans-Medium', color: 'white', fontSize: 15 }}>Thanh toán</Text>

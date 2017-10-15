@@ -2,7 +2,8 @@ import { createStore } from 'redux';
 
 const defaultState = {
   bill: null,
-  totalCost: 0,
+  totalPrice: 0,
+  BillList: [],
   Room: 0,
   ItemList:
   [
@@ -152,16 +153,22 @@ const reducer = (state = defaultState, action) => {
         ItemList:
         state.ItemList.map(e => {
           if (e.id != action.id) return e;
-          if (action.is_none_sugar==true)
-          {
-           
+          if (action.is_none_sugar == true) {
+
             return { ...e, none_sugar_quantity: action.quantity };
           }
           else return { ...e, have_sugar_quantity: action.quantity };
 
 
         })
-      } 
+      }
+    case 'SET_BILL_LIST':
+ 
+      return {
+        ...state,
+        BillList:action.BillList,
+       totalPrice:action.totalPrice
+      }
     case 'ADD_TO_CART':
       return {
         ...state,

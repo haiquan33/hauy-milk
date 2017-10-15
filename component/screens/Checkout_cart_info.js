@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
 import { connect } from 'react-redux';
 import BackgroundImage from './background_image.js';
-
+import {FirebaseApp} from '../FirebaseConfig.js'
 
 class Checkout_cart_info extends React.Component {
     static navigationOptions = {
@@ -17,10 +17,20 @@ class Checkout_cart_info extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { totalPrice: 0 };
-
+        this.state = { totalPrice: 0,Room:this.props.Room,Note:'',PhoneNo:'' };
+        this.itemRef=FirebaseApp.database().ref('Bills');
     }
 
+    send_bill()
+    {
+       
+        this.itemRef.child(this.state.Room).push({
+            Bill:this.props.BillList,
+            Note:this.state.Note,
+            PhoneNo:this.state.PhoneNo
+           
+        })
+    }
     render() {
 
         return (
@@ -34,7 +44,7 @@ class Checkout_cart_info extends React.Component {
                         keyboardType='numeric'
                         maxLength={10}
                         value={this.state.Room}
-                        onChangeText={text => this.setState({ Room: text, Room_inputed: true })} />
+                        onChangeText={text => this.setState({ Room: text})} />
                 </View>
                 <View style={styles.container} >
                     <Text style={styles.text}>Số điện thoại</Text>
@@ -67,10 +77,7 @@ class Checkout_cart_info extends React.Component {
                         onChangeText={text => this.setState({ Note: text })} />
                 </View>
                 <View style={styles.footer} >
-                    <View style={{ flexDirection: 'column', marginLeft: 10, marginTop: 2 }}>
-                        <Text style={{ color: 'white', fontFamily: 'iCielNovecentosans-Medium', fontSize: 15 }}>Tổng cộng</Text>
-                        <Text style={{ color: '#017445', fontFamily: 'UTM-Aptima', fontSize: 25 }}>{this.state.totalPrice} VNĐ</Text>
-                    </View>
+                   
 
                     <TouchableOpacity style={{
                         height: 40,
@@ -84,7 +91,8 @@ class Checkout_cart_info extends React.Component {
                         right: 10,
                         display: this.state.can_go_next_page,
                     }} onPress={() => {
-                        this.props.navigation.navigate('Checkout_cart_info');
+                        this.send_bill();
+                        //this.props.navigation.navigate('Checkout_cart_info');
                     }}>
                         <Text style={{ margin: 10, fontFamily: 'iCielNovecentosans-Medium', color: 'white', fontSize: 15 }}>Đặt ngay</Text>
                        
@@ -99,7 +107,7 @@ class Checkout_cart_info extends React.Component {
 
 
 function MapState2Prop(state) {
-    return { Room: state.Room };
+    return { Room: state.Room, BillList:state.BillList };
   }
   export default connect(MapState2Prop)(Checkout_cart_info);
   

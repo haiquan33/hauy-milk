@@ -3,6 +3,7 @@ import { StyleSheet, Text, View,TouchableOpacity,Image } from 'react-native';
 
 import { connect } from 'react-redux';
 import Toast, {DURATION} from 'react-native-easy-toast';
+import CheckoutButton from './Checkout_button.js';
  class Item_detail_page extends React.Component{
   
     constructor(props) {
@@ -14,14 +15,14 @@ import Toast, {DURATION} from 'react-native-easy-toast';
       }
 
 
-    static navigationOptions={
+    static navigationOptions= ({ navigation, screenProps })=>({
         headerTintColor:'white',
          headerStyle: {
               backgroundColor: '#FFCC59',
               justifyContent:'center'
           },
-
-      }
+          headerRight: <CheckoutButton navigation={navigation}/>,
+      })
 
           //set this item current sugar state is none sugar
     set_to_none_sugar() {

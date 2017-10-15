@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import ItemList_Adapter from './ItemList_adapter.js';
 
 
+
 class ItemList extends React.Component {
   static navigationOptions = {
     tabBarLabel: 'Cửa hàng',
@@ -16,6 +17,7 @@ class ItemList extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        
         <FlatList
           data={this.props.ItemList}
           renderItem={({ item }) => <ItemList_Adapter myItem={item} navigation={this.props.navigation} />}

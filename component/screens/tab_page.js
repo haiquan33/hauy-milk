@@ -7,7 +7,7 @@ import {connect} from 'react-redux';
 import ItemList from './tab_ItemList.js';
 import PromoList from './tab_promoList.js';
 import MenuButton from '../menu_button.js';
-
+import CheckoutButton from './Checkout_button.js';
 
 
 
@@ -33,6 +33,7 @@ const TabBar=TabNavigator({
     },
     navigationOptions:  ({ navigation }) => ({
         headerLeft : <MenuButton/>,
+        headerRight: <CheckoutButton navigation={navigation}/>,
          headerTintColor:'white',
          headerStyle: {
               backgroundColor: '#FFCC59',

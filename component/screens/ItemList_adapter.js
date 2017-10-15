@@ -35,13 +35,14 @@ class ItemList_Adapter extends React.Component {
         })
     }
     add_to_cart(){
+  
          this.props.dispatch({
                 type:'ADD_TO_CART',
                 id:this.props.myItem.id
          })
     }
     goto_detail_page() {
-        console.log("CLICKED");
+    
         this.props.navigation.navigate('Item_detail_page',{myItem:this.props.myItem});
     }
     render() {

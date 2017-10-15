@@ -10,11 +10,11 @@ export default class MenuButton extends React.Component {
   render(){
 
     return (
-        <TouchableOpacity style={{width:50, height:50, margin:20,marginTop:30}}
+        <TouchableOpacity style={{width:50, height:50, margin:20,marginTop:35}}
                           onPress={ () => {this.context.drawer.open()} }  >
 
           <Image source={require('../assets/images/menu_ico.png')}
-                      style={{width:25,height:25}}/>
+                      style={{width:30,height:30}}/>
         </TouchableOpacity>
     )
   }

@@ -13,6 +13,7 @@ import MenuButton from '../menu_button.js';
 import Item_detail_page from '../screens/Item_detail_page.js';
 import Checkout_cart_check from '../screens/Checkout_cart_check.js';
 import Checkout_cart_info from '../screens/Checkout_cart_info.js';
+import Checkout_complete from '../screens/Checkout_complete.js';
 
 ScreenStack = StackNavigator(
   {
@@ -33,6 +34,9 @@ ScreenStack = StackNavigator(
     Checkout_cart_info:{
       screen: Checkout_cart_info,
       
+    },
+    Checkout_complete:{
+        screen: Checkout_complete,
     }
   },
 

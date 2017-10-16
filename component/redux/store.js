@@ -169,6 +169,13 @@ const reducer = (state = defaultState, action) => {
         BillList:action.BillList,
        totalPrice:action.totalPrice
       }
+    case 'RESET_BILL':
+      
+           return {
+             ...state,
+             ItemList:defaultState.ItemList,
+              totalPrice:0
+           }
     case 'ADD_TO_CART':
       return {
         ...state,

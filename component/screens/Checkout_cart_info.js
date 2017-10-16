@@ -17,7 +17,7 @@ class Checkout_cart_info extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { totalPrice: 0,Room:this.props.Room,Note:'',PhoneNo:'' };
+        this.state = { Room:this.props.Room,Note:'',PhoneNo:'' };
         this.itemRef=FirebaseApp.database().ref('Bills');
     }
 
@@ -27,9 +27,15 @@ class Checkout_cart_info extends React.Component {
         this.itemRef.child(this.state.Room).push({
             Bill:this.props.BillList,
             Note:this.state.Note,
-            PhoneNo:this.state.PhoneNo
-           
+            PhoneNo:this.state.PhoneNo,
+            totalPrice:this.props.totalPrice
         })
+    }
+    reset_bill()
+    {
+    this.props.dispatch({
+            type: 'RESET_BILL',
+           })
     }
     render() {
 
@@ -92,7 +98,8 @@ class Checkout_cart_info extends React.Component {
                         display: this.state.can_go_next_page,
                     }} onPress={() => {
                         this.send_bill();
-                        //this.props.navigation.navigate('Checkout_cart_info');
+                        this.reset_bill();
+                        this.props.navigation.navigate('Checkout_complete');
                     }}>
                         <Text style={{ margin: 10, fontFamily: 'iCielNovecentosans-Medium', color: 'white', fontSize: 15 }}>Đặt ngay</Text>
                        
@@ -107,7 +114,7 @@ class Checkout_cart_info extends React.Component {
 
 
 function MapState2Prop(state) {
-    return { Room: state.Room, BillList:state.BillList };
+    return { Room: state.Room, BillList:state.BillList,totalPrice:state.totalPrice };
   }
   export default connect(MapState2Prop)(Checkout_cart_info);
   
